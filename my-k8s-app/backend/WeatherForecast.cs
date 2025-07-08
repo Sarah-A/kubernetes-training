@@ -1,4 +1,4 @@
-namespace my_k8s_app.Web;
+namespace WebApplication1;
 
 public class WeatherForecast
 {
