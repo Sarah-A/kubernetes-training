@@ -1,0 +1,12 @@
+﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 
+
+WORKDIR /app
+
+COPY *.csproj ./
+RUN dotnet restore "backend.csproj"
+
+EXPOSE 80
+EXPOSE 443
+
+CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0:80", "https://0.0.0:443"]
+# "watch" is used for development purposes, it will automatically rebuild and restart the application on code changes.

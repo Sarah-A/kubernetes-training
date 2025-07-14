@@ -29,5 +29,24 @@ public class WeatherForecastController : ControllerBase
             })
             .ToArray();
     }
+
+    [HttpGet("{date}")]
+    public IEnumerable<WeatherForecast> GetByDate(DateOnly? date)
+    {
+        if (date.HasValue)
+        {
+            return
+            [
+                new WeatherForecast
+                {
+                    Date = date.Value,
+                    TemperatureC = Random.Shared.Next(-20, 55),
+                    Summary = "Seriously Freezing"
+                }
+            ];
+        }
+    
+        return [];
+    }
 }
 

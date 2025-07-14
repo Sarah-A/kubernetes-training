@@ -1,0 +1,31 @@
+﻿version: '3.8' # Use version 3.8 of the Docker Compose file format
+
+services:
+  backend-service:   
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev    
+    container_name: my-k8s-app-backend
+    ports:
+      - "5027:80" # Expose port 5027 for the backend service
+    volumes:
+      - ./backend:/app
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+    
+  frontend-service:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: my-k8s-app-frontend
+    ports:
+      - "3000:3000" # Expose port 5028 for the frontend service
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true # Enable polling for file changes in development
+    depends_on:
+      - backend-service

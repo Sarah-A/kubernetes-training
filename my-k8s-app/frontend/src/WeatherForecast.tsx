@@ -14,7 +14,8 @@ export class WeatherForecast extends React.Component<{}, State> {
     }
     
     async componentDidMount() {
-        const response = await fetch('http://localhost:5209/WeatherForecast');
+        //const response = await fetch('http://localhost:5027/WeatherForecast');
+        const response = await fetch('http://backend-service:80');
         if (response.ok) {
         const data: WeatherForecastResource[] = await response.json();
         this.setState({ forecast: data });
@@ -27,7 +28,7 @@ export class WeatherForecast extends React.Component<{}, State> {
         return (
         <div className="App">
             <header className="App-header">
-            <h1>Weather Forecast</h1>
+            <h1>Weather Forecast :-)</h1>
             <ul>
                 {this.state.forecast.map((item, index) => (
                 <li key={index}>
